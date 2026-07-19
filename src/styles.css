@@ -4,17 +4,20 @@
 :root {
   --bg: #000000;
   --fg: #EAEAEA;
-  --muted: #7a7a7a;
-  --line: #333333;
+  --dim: #6a6a6a;
+  --line: #1f1f1f;
+  --line-strong: #2e2e2e;
 }
 
 html, body {
   background: var(--bg);
   color: var(--fg);
-  font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", "SF Mono", "Menlo", "Consolas", monospace;
-  font-size: 15px;
-  line-height: 1.6;
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  font-feature-settings: "calt" 0, "liga" 0;
   -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
 * {
@@ -30,29 +33,34 @@ html, body {
 a {
   color: inherit;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 4px;
   text-decoration-thickness: 1px;
-  transition: background-color 80ms linear, color 80ms linear;
+  transition: background-color 60ms linear, color 60ms linear, text-decoration-color 60ms linear;
 }
 
 a:hover {
   background: var(--fg);
   color: var(--bg);
+  text-decoration-color: var(--bg);
 }
 
-hr {
-  border: 0;
+.rule {
   border-top: 1px solid var(--line);
-  margin: 3rem 0;
 }
 
 .cursor::after {
-  content: "_";
+  content: "▊";
   display: inline-block;
-  margin-left: 4px;
-  animation: blink 1s steps(2, start) infinite;
+  margin-left: 6px;
+  color: var(--fg);
+  animation: blink 1.05s steps(2, start) infinite;
+  transform: translateY(1px);
 }
 
 @keyframes blink {
-  to { visibility: hidden; }
+  to { opacity: 0; }
 }
+
+.dim { color: var(--dim); }
+.uppercase-tight { letter-spacing: 0.14em; }
