@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Gokul Ravindran — 0xneox / binarybodhi" },
+      { name: "description", content: "Blockchain developer. Security researcher. CTO. Building since 2014. On-chain since 2015." },
+      { name: "author", content: "Gokul Ravindran" },
+      { property: "og:title", content: "Gokul Ravindran — 0xneox / binarybodhi" },
+      { property: "og:description", content: "Blockchain developer. Security researcher. CTO." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:site", content: "@0xneox" },
     ],
     links: [
       {
