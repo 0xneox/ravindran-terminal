@@ -4,9 +4,13 @@
 :root {
   --bg: #000000;
   --fg: #EAEAEA;
-  --dim: #6a6a6a;
+  --dim: #7a7a7a;
   --line: #1f1f1f;
   --line-strong: #2e2e2e;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html, body {
@@ -36,13 +40,29 @@ a {
   text-decoration-color: var(--line-strong);
   text-underline-offset: 4px;
   text-decoration-thickness: 1px;
-  transition: background-color 60ms linear, color 60ms linear, text-decoration-color 60ms linear;
+  transition: background-color 150ms ease, color 150ms ease, text-decoration-color 150ms ease;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  border-radius: 2px;
 }
 
 a:hover {
   background: var(--fg);
   color: var(--bg);
   text-decoration-color: var(--bg);
+}
+
+a:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 2px;
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 640px) {
+  a {
+    padding: 4px 6px;
+    margin: -4px -6px;
+  }
 }
 
 .rule {
@@ -62,5 +82,129 @@ a:hover {
   to { opacity: 0; }
 }
 
-.dim { color: var(--dim); }
+/* Non-dual/Trika inspired animations */
+@keyframes breathe {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.08; }
+}
+
+@keyframes slow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes mandala-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtle-glow {
+  0%, 100% { text-shadow: 0 0 20px rgba(234, 234, 234, 0.1); }
+  50% { text-shadow: 0 0 30px rgba(234, 234, 234, 0.2); }
+}
+
+/* Background mandala effect */
+.mandala-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80vmin;
+  height: 80vmin;
+  margin-left: -40vmin;
+  margin-top: -40vmin;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  opacity: 0.06;
+  animation: mandala-rotate 120s linear infinite, breathe 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mandala-bg::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.mandala-bg::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  right: 20%;
+  bottom: 20%;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .mandala-bg {
+    width: 90vmin;
+    height: 90vmin;
+    margin-left: -45vmin;
+    margin-top: -45vmin;
+    opacity: 0.04;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .mandala-bg {
+    animation: none;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Section fade-in animation */
+.section-fade-in {
+  animation: fade-in-up 2s ease-out forwards;
+  opacity: 0;
+}
+
+.section-fade-in:nth-child(1) { animation-delay: 0.2s; }
+.section-fade-in:nth-child(2) { animation-delay: 0.4s; }
+.section-fade-in:nth-child(3) { animation-delay: 0.6s; }
+.section-fade-in:nth-child(4) { animation-delay: 0.8s; }
+
+/* Subtle text glow for headings */
+h1 {
+  animation: subtle-glow 4s ease-in-out infinite;
+}
+
+/* Slow pulse for dim elements */
+.dim {
+  color: var(--dim);
+  animation: slow-pulse 6s ease-in-out infinite;
+}
+
 .uppercase-tight { letter-spacing: 0.14em; }
